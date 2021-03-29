@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mvi-automation-scripts:
+    image: manual-logs:latest
+    container_name: manual-logs
+    restart: always
+    volumes:
+      - "./logs/:/app/src/logs/"
+      - "./scripts/install-nvm-and-nodes.sh:/usr/local/bin/install-nvm-and-nodes.sh"
+      - "./scripts/start.sh:/usr/local/bin/start.sh"
+    command: /bin/sh -c "/bin/bash start.sh && /bin/bash install-nvm-and-nodes.sh"
+    ports:
+      - "4444"
+    networks:
+      - mvi
+
+networks:
+  mvi:
+    driver: bridge

@@ -10,13 +10,33 @@ export const logType = {
   warn: 'warn'
 }
 
+export const messages = {
+  LOGIN_FAILED: 'Fail to login to portal',
+  LOGIN_SUCCESS: 'Login successfully',
+  ACCESS_FAILED: 'Fail to access to portal',
+  WRITE_LOGS_FAILED: 'Fail to write log',
+  DEVICE_NOT_AVAILABLE: 'Device not available',
+  DEVICE_NOT_FOUND: 'No device matching',
+  SESSION_NOT_START: 'Session can not start',
+  ROTATE_SCREEN_FAILED: 'Manual sesion error with device could not rotate the screen',
+  ROTATE_SCREEN_SUCCESS: 'Device rotate screen successfully',
+  EXIT_SESSION_ERROR: 'Exit session error',
+  EXIT_SESSION_SUCCESS: 'Exit session successfully'
 
+}
 export const deviceTypes = {
   cloud: 'cloud',
   inHouse: 'in-house'
 }
 
 export const DEVICE_CHECKUP_CHROME_EXECUTABLE_PATH = '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+// export const DEVICE_CHECKUP_CHROME_EXECUTABLE_PATH = '/usr/bin/google-chrome'
+
+export const platformNames = {
+  android: 'Android',
+  ios: 'iOS'
+}
+
 export const BROWSER_TYPES = {
   CHROME: 'chrome',
   SAFARI: 'safari'
@@ -25,29 +45,6 @@ export const BROWSER_TYPES = {
 export const DEVICE_GROUP_TYPES = {
   KOBITON: 'KOBITON',
   ORGANIZATION: 'ORGANIZATION'
-}
-
-export const DEVICE_CHECKUP_FAILURE_TYPES = {
-  SYSTEM_ISSUE: {
-    ACCESS_FAILED: 'Fail to access to portal',
-    LOGIN_FAILED: 'Fail to login to portal'
-  },
-  LAUNCH_DEVICE_FAILED: {
-    DEVICE_IS_UTILIZING: 'Fail to launch device because it is utilizing',
-    UNKNOWN: 'Fail to launch device'
-  },
-  MANUAL_SESSION_FAILTURE_TYPE: {
-    SESSION_NOT_START: 'It took too long to start session',
-    INSTALL_APP_TIMEOUT: 'It took too long to install application',
-    INSTALL_APP_FAILED: 'Fail to install application',
-    ROTATE_SCREEN_FAILED: 'Fail to rotate the screen',
-    POWER_FAILED: 'Fail to turn off/on the screen'
-  },
-  AUTO_SESSION_FAILURE_TYPES: {
-    DRIVER_NOT_INIT: 'Fail to init driver',
-    ACCESS_INTERNET_FAILED: 'Fail to access to internet',
-    DRIVER_NOT_QUIT: 'Fail to quit driver'
-  }
 }
 
 export const PORTAL_SELECTOR = {

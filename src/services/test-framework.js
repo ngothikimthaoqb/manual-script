@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import {DEVICE_CHECKUP_CHROME_EXECUTABLE_PATH} from '../enums/index.js'
+import {SYSTEM_LOADING_TIMEOUT} from '../config.js'
 
 export default class Page {
   constructor() {
@@ -10,19 +11,17 @@ export default class Page {
   async start(isInVisible = false) {
     const options = {
       headless: isInVisible,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: DEVICE_CHECKUP_CHROME_EXECUTABLE_PATH || null
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--start-maximized'],
+      executablePath: DEVICE_CHECKUP_CHROME_EXECUTABLE_PATH || null,
+      defaultViewport: null
     }
 
     this._browser = await puppeteer.launch(options)
     this._page = await this._browser.newPage()
-    await this._page.setViewport({width: 1600, height: 1000})
   }
 
   async openNewTab() {
     this._page = await this._browser.newPage()
-    await this._page.setViewport({width: 1600, height: 1000})
-
   }
 
   gotoUrl(url = '', options = {}) {
@@ -48,6 +47,23 @@ export default class Page {
     return text
   }
 
+  async getUrl() {
+    return this._page.url()
+  }
+
+  async isExistingElement(element) {
+    let value
+
+    try {
+      await this._page.waitForSelector(element)
+      value = true
+    } catch {
+      value = false
+    }
+
+    return value
+  }
+
   async click(element, options = {}) {
     await this._page.waitForSelector(element, options)
     return this._page.click(element)
@@ -69,7 +85,7 @@ export default class Page {
     return this._page.waitForNavigation(options)
   }
 
-  waitForLoading(selectorOrTimeout = 6000, options = {}) {
+  waitForLoading(selectorOrTimeout = SYSTEM_LOADING_TIMEOUT, options = {}) {
     return this._page.waitForTimeout(selectorOrTimeout, options)
   }
 
@@ -83,5 +99,22 @@ export default class Page {
 
   press(key) {
     return this._page.keyboard.press(key)
+  }
+
+  close()  {
+    return this._page.close()
+  }
+
+  setDefaultTimeout(time){
+    return this._page.setDefaultTimeout(time)
+  }
+
+  getTimeOut(){
+    return  this._page._timeoutSettings.timeout()
+  }
+
+  close() {
+    this._page.close()
+    this._browser.close()
   }
 }

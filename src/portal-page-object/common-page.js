@@ -1,5 +1,6 @@
-import * as fs from 'fs';
-
+import * as fs from 'fs'
+import {messages} from '../enums/index.js'
+import {SYSTEM_LOADING_TIMEOUT, SYSTEM_LOADING_ELEMENT_TIMEOUT} from '../config.js'
 export default class CommonPage {
   ensureLastPageClosed = async (page) => {
     try {
@@ -13,26 +14,31 @@ export default class CommonPage {
 
   accessToSite = async (page, url) => {
     try {
+      await page.setDefaultTimeout(SYSTEM_LOADING_TIMEOUT)
       await page.gotoUrl(url
         , {
         waitUntil: 'load',
-        timeout: 600000
-      }
-      )
+        timeout: SYSTEM_LOADING_TIMEOUT
+      })
 
       // expect the page must load to Kobiton portal page
       await page.waitingForLoadingNewPage()
     }
     catch (err) {
-      throw new Error('ACCESS_FAILED')
+      throw new Error(messages.ACCESS_FAILED)
     }
   }
 
   writeLog = (log) => {
     const message = new Date() + ':' + log
     console.log(message)
-    fs.appendFile('./log.txt', message, (err) => {
-      if (err) throw err
+    fs.appendFile('../logs/log.txt', message, (err) => {
+      if (err) throw new Error(messages.WRITE_LOGS_FAILED)
     })
   }
+  delay(time) {
+    return new Promise((resolve) => { 
+      setTimeout(resolve, time)
+    })
+ }
 }

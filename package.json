@@ -3,25 +3,12 @@
   "version": "0.0.1",
   "author": "Kobiton Inc.",
   "type": "module",
-  "scripts": {
-    "build": "rimraf build && babel src -d build",
-    "debug": "nodemon src/index.js --exec 'babel-node --inspect'",
-    "start": "nodemon src/index.js --exec babel-node"
-  },
   "dependencies": {
     "bluebird": "^3.7.2",
-    "debug": "^4.3.1",
+    "cluster": "^0.7.7",
+    "http": "0.0.1-security",
     "lodash": "^4.17.10",
-    "puppeteer": "^8.0.0",
-    "selenium-webdriver": "^4.0.0-alpha.5"
-  },
-  "devDependencies": {
-    "eslint": "^5.2.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-babel": "^5.1.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0"
+    "os": "^0.1.1",
+    "puppeteer": "^8.0.0"
   }
 }

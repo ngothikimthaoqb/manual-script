@@ -1,0 +1,16 @@
+Sun Mar 28 2021 23:43:48 GMT+0700 (Indochina Time):infor: Login successfully
+Sun Mar 28 2021 23:43:51 GMT+0700 (Indochina Time):infor: Login successfully
+Sun Mar 28 2021 23:43:57 GMT+0700 (Indochina Time):infor: Login successfully
+Sun Mar 28 2021 23:43:58 GMT+0700 (Indochina Time):infor: Manual sesion start with udid 988bdd333649355539 
+Sun Mar 28 2021 23:44:02 GMT+0700 (Indochina Time):infor: Manual sesion start with udid R58N14F9LJE 
+Sun Mar 28 2021 23:44:04 GMT+0700 (Indochina Time):infor: Login successfully
+Sun Mar 28 2021 23:44:09 GMT+0700 (Indochina Time):infor: Manual sesion start with udid f1f50e813ac0d27b3e5ff652ac4abf032a775b09 
+Sun Mar 28 2021 23:44:15 GMT+0700 (Indochina Time):infor: Manual sesion start with udid 988913303457344a35 
+Sun Mar 28 2021 23:45:39 GMT+0700 (Indochina Time):infor: Device rotate screen successfully 
+Sun Mar 28 2021 23:45:43 GMT+0700 (Indochina Time):infor: Device rotate screen successfully 
+Sun Mar 28 2021 23:45:45 GMT+0700 (Indochina Time):infor: Exit session successfully 
+Sun Mar 28 2021 23:45:49 GMT+0700 (Indochina Time):infor: Exit session successfully 
+Sun Mar 28 2021 23:45:56 GMT+0700 (Indochina Time):infor: Device rotate screen successfully 
+Sun Mar 28 2021 23:46:02 GMT+0700 (Indochina Time):infor: Exit session successfully 
+Sun Mar 28 2021 23:47:49 GMT+0700 (Indochina Time):infor: Device rotate screen successfully 
+Sun Mar 28 2021 23:47:56 GMT+0700 (Indochina Time):infor: Exit session successfully 
