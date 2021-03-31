@@ -5,7 +5,7 @@ import DeviceListPage from '../portal-page-object/device-list-page.js'
 import DeviceLaunchingPage from '../portal-page-object/device-launching-page.js'
 import {SITE_CONFIG} from '../config.js'
 
-export async function main() {
+export async function main(udid) {
   const page = new Page()
   const commonPage = new CommonPage(page)
   const loginPage = new LoginPage(page)
@@ -52,7 +52,7 @@ export async function main() {
     var i = 0
     while(i < SITE_CONFIG.ANDROIDUDIDS.length) {
       try {
-        await launchDevice(SITE_CONFIG.ANDROIDUDIDS[i])
+        await launchDevice(udid)
         await performManualSteps()
       }
       catch(err) {
@@ -70,3 +70,4 @@ export async function main() {
 }
 
 main()
+

@@ -11,6 +11,10 @@ import {SITE_CONFIG} from '../config.js'
 const MAXIMUM_DEVICE = 4
 const page = new Page()
 const commonPage = new CommonPage(page)
+const firedTime = 6 * 60 * 1000
+let count = 1
+let startTime = new Date().getTime()
+const time = 3 * 24 * 60 * 60 * 1000
 
 async function runManual(udid) {
   const loginPage = new LoginPage(page)
@@ -38,23 +42,20 @@ async function runManual(udid) {
         await deviceLaunchingPage.waitForSessionStarted()
       }
     catch (err) {
-      console.log('waiting device error')
-    }
-    try {
-      await deviceLaunchingPage.closeItaGuardrail()
-    }
-    catch (err) {
-      console.log('close ita guardrail')
-    }
-    try {
-      await deviceLaunchingPage.rotateScreen()
-    }
-    catch (err) {
-      console.log('rotate screen error')
-    }
+        console.log('waiting device error')
+      }
+      
+      try {
+        await deviceLaunchingPage.rotateScreen(udid)
+        await page.waitForLoading(30000)
+        await deviceLaunchingPage.rotateScreen(udid)
+      }
+      catch (err) {
+        console.log('rotate screen error')
+      }
     }
     finally {
-      await deviceLaunchingPage.exitSession()
+      await deviceLaunchingPage.exitSession(udid)
     }
   }
   
@@ -73,10 +74,12 @@ async function runManual(udid) {
 async function main () {
   const numCPUs = os.cpus().length
 
-  if (cluster.isMaster) {
+  console.log(numCPUs, 'numCPUs')
+  if (cluster.isMaster ) {
     console.log(`Master ${process.pid} is running`);
     
-    if (numCPUs >= MAXIMUM_DEVICE) {
+    if (numCPUs >= MAXIMUM_DEVICE && count===1) {
+      console.log('aaaaaa')
       let i = 0 
       while (i < MAXIMUM_DEVICE) {
         cluster.fork()
@@ -101,27 +104,30 @@ async function main () {
     // In this case it is an HTTP server
     http.createServer((req, res) => {
       res.writeHead(200)
-      res.end('hello world\n')
+      res.end('Current process\n')
     }).listen(8000)
     let i = 0
-    while (i < MAXIMUM_DEVICE) {
-      if (cluster.worker.id === i+1) {
-        runManual(SITE_CONFIG.ANDROIDUDIDS[i])
+    setInterval(async function () {
+      await commonPage.writeLog(`Iteration ${count}\n`)
+      while (i < MAXIMUM_DEVICE) {
+        console.log(cluster.worker.id, 'cluster.worker.id')
+        if (cluster.worker.id === i+1) {
+          runManual(SITE_CONFIG.ANDROIDUDIDS[i])
+        }
+        i++
       }
-      i++
-    }
+      if (i >= MAXIMUM_DEVICE) {
+        i = 0
+      }
+
+      if (new Date().getTime() - startTime >  time) {
+        process.exit(1)
+      }
+
+      count++
+    }, firedTime)
+  
     console.log(`Worker ${process.pid} started ${cluster.worker.id}`)
   }
 }
-// main()
-const firedTime = 25 * 60 * 1000
-let count = 1
-setInterval(async function () {
-  await commonPage.writeLog(`Iteration ${count}\n`)
-  main()
-  count++
-}, firedTime)
-
-
-
 
