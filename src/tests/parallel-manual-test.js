@@ -14,7 +14,7 @@ const commonPage = new CommonPage(page)
 const firedTime = 6 * 60 * 1000
 let count = 1
 let startTime = new Date().getTime()
-const time = 3 * 24 * 60 * 60 * 1000
+const time = 3 * 24 * 60 * 60 * 1000 
 
 async function runManual(udid) {
   const loginPage = new LoginPage(page)
@@ -130,4 +130,6 @@ async function main () {
     console.log(`Worker ${process.pid} started ${cluster.worker.id}`)
   }
 }
+
+main()
 
